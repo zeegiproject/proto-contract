@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package ai.v1;
+
+// The AI Service handles all real-time educational interactions.
+service AIService {
+  // Streams tokens back to the client for a "typing" effect.
+  rpc Chat(ChatRequest) returns (stream ChatChunk);
+}
+
+message ChatRequest {
+  string session_id = 1;
+  string prompt = 2;
+  string context = 3; // JSON or serialized history/vector context
+}
+
+message ChatChunk {
+  string token = 1;
+  bool is_final = 2;
+}
