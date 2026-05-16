@@ -6,6 +6,24 @@ package ai.v1;
 service AIService {
   // Streams tokens back to the client for a "typing" effect.
   rpc Chat(ChatRequest) returns (stream ChatChunk);
+
+  // New method for topic planning
+  rpc GetTopicPlan(TopicPlanRequest) returns (TopicPlanResponse);
+}
+
+message TopicPlanRequest {
+  string topic = 1;      // e.g., "Figures of Speech"
+  string language = 2;   // optional, e.g., "English"
+}
+
+message TopicSection {
+  string title = 1;       // e.g., "Nouns"
+  string description = 2; // Brief overview of what this section covers
+}
+
+message TopicPlanResponse {
+  string topic = 1;
+  repeated TopicSection sections = 2; // The structured list of sections
 }
 
 message ChatRequest {
