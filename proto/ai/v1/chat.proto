@@ -1,35 +1,32 @@
 syntax = "proto3";
-
 package ai.v1;
 
-// The AI Service handles all real-time educational interactions.
 service AIService {
-  // Streams tokens back to the client for a "typing" effect.
   rpc Chat(ChatRequest) returns (stream ChatChunk);
-
-  // New method for topic planning
   rpc GetTopicPlan(TopicPlanRequest) returns (TopicPlanResponse);
 }
 
 message TopicPlanRequest {
-  string topic = 1;      // e.g., "Figures of Speech"
-  string language = 2;   // optional, e.g., "English"
+  string topic = 1;
+  string language = 2;
 }
 
 message TopicSection {
-  string title = 1;       // e.g., "Nouns"
-  string description = 2; // Brief overview of what this section covers
+  string title = 1;
+  string description = 2;
 }
 
 message TopicPlanResponse {
-  string topic = 1;
-  repeated TopicSection sections = 2; // The structured list of sections
+  repeated TopicSection sections = 1;
+  string topic = 2;
+  string subject = 3;
 }
 
 message ChatRequest {
   string session_id = 1;
   string prompt = 2;
-  string context = 3; // JSON or serialized history/vector context
+  string context = 3;
+  string subject = 4;
 }
 
 message ChatChunk {
