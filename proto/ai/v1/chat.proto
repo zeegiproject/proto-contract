@@ -5,6 +5,7 @@ service AIService {
   rpc Chat(ChatRequest) returns (stream ChatChunk);
   rpc GetTopicPlan(TopicPlanRequest) returns (TopicPlanResponse);
   rpc GetLesson(LessonRequest) returns (LessonResponse);
+  rpc GetSyllabus(SyllabusRequest) returns (SyllabusResponse);
 }
 
 message TopicPlanRequest {
@@ -43,6 +44,20 @@ message LessonResponse {
   int32 section_index = 4;
   repeated LessonSlide slides = 5;
   string challenge_json = 6;
+}
+
+message SyllabusRequest {
+  string subject = 1;
+}
+
+message SyllabusTopic {
+  string name = 1;
+  repeated string subtopics = 2;
+}
+
+message SyllabusResponse {
+  string subject = 1;
+  repeated SyllabusTopic topics = 2;
 }
 
 message ChatRequest {
