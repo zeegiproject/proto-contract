@@ -70,4 +70,5 @@ message ChatRequest {
 message ChatChunk {
   string token = 1;
   bool is_final = 2;
+  string next_action = 3; // memo | challenge_2 | challenge_3 | retake | continue
 }
