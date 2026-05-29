@@ -6,6 +6,7 @@ service AIService {
   rpc GetTopicPlan(TopicPlanRequest) returns (TopicPlanResponse);
   rpc GetLesson(LessonRequest) returns (LessonResponse);
   rpc GetSyllabus(SyllabusRequest) returns (SyllabusResponse);
+  rpc GetStudentInsight(InsightRequest) returns (InsightResponse);
 }
 
 message TopicPlanRequest {
@@ -71,4 +72,18 @@ message ChatChunk {
   string token = 1;
   bool is_final = 2;
   string next_action = 3; // memo | challenge_2 | challenge_3 | retake | continue
+}
+
+message InsightRequest {
+  string session_id = 1;
+  string subject = 2;
+  repeated string intents = 3;
+}
+
+message InsightResponse {
+  string learning_speed = 1;
+  bool needs_support = 2;
+  repeated string weak_signals = 3;
+  string recommended_style = 4;
+  string encouragement_message = 5;
 }
